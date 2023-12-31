@@ -21,7 +21,11 @@ const initialFishes = [
   },
 ];
 
-export function FunctionalScoreBoard({ correctCount, incorrectCount, answersLeft }) {
+export function FunctionalScoreBoard({
+  correctCount,
+  incorrectCount,
+  answersLeft,
+}) {
   return (
     <div id="score-board">
       <div>Incorrect 🔻: {incorrectCount}</div>

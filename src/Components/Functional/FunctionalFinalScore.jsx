@@ -9,10 +9,7 @@ export const FunctionalFinalScore = ({ correctCount, totalCount }) => {
         <p> {correctCount}</p>
         <hr />
         <p> {totalCount}</p>
-       
-       
       </div>
     </div>
   );
 };
-

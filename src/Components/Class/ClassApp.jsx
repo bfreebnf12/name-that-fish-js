@@ -9,13 +9,14 @@ export class ClassApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    incorrectCount: 0,
-    correctCount: 0,
+      incorrectCount: 0,
+      correctCount: 0,
     };
   }
 
   handleAnswer = (userGuess) => {
-    const currentFishIndex = this.state.correctCount + this.state.incorrectCount;
+    const currentFishIndex =
+      this.state.correctCount + this.state.incorrectCount;
 
     const isCorrect = initialFishes[currentFishIndex] === userGuess;
 
@@ -47,7 +48,7 @@ export class ClassApp extends Component {
           correctCount={correctCount}
           answersLeft={initialFishes}
         />
-        
+
         {gameOver ? (
           <ClassFinalScore
             correctCount={correctCount}
@@ -65,4 +66,3 @@ export class ClassApp extends Component {
     );
   }
 }
-  

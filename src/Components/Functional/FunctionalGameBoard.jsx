@@ -34,14 +34,12 @@ export function FunctionalGameBoard({ nextFishIndex, handleAnswer, gameOver }) {
     const normalizedUserGuess = userGuess.toLowerCase();
     const normalizedFishName = nextFishToName.name.toLowerCase();
 
-    
     if (normalizedUserGuess === normalizedFishName) {
       setIsCorrect(true);
     } else {
       setIsCorrect(false);
     }
 
-    
     handleAnswer(normalizedUserGuess);
 
     setUserGuess("");
@@ -64,14 +62,9 @@ export function FunctionalGameBoard({ nextFishIndex, handleAnswer, gameOver }) {
             />
             <input type="submit" />
           </form>
-          
         </>
       )}
-      {gameOver && (
-        <div id="counts">
-          {}
-        </div>
-      )}
+      {gameOver && <div id="counts">{}</div>}
     </div>
   );
 }
