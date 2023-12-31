@@ -1,11 +1,27 @@
+import React from "react";
 import "./styles/score-board.css";
-//  Where the score is presented
 
-const incorrectCount = 0;
-const correctCount = 0;
-const answersLeft = ["trout", "salmon", "tuna", "shark"];
+// Array of fish objects
+const initialFishes = [
+  {
+    name: "trout",
+    url: "URL_TO_TROUT_IMAGE",
+  },
+  {
+    name: "salmon",
+    url: "URL_TO_SALMON_IMAGE",
+  },
+  {
+    name: "tuna",
+    url: "URL_TO_TUNA_IMAGE",
+  },
+  {
+    name: "shark",
+    url: "URL_TO_SHARK_IMAGE",
+  },
+];
 
-export function FunctionalScoreBoard() {
+export function FunctionalScoreBoard({ correctCount, incorrectCount, answersLeft }) {
   return (
     <div id="score-board">
       <div>Incorrect 🔻: {incorrectCount}</div>
