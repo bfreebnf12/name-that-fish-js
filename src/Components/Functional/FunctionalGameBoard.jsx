@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./styles/game-board.css";
 import { Images } from "../../assets/Images";
-import { FunctionalFinalScore } from "./FunctionalFinalScore";
 
-const initialFishes = [
+
+export const initialFishes = [
   {
     name: "trout",
     url: Images.trout,
@@ -22,9 +22,9 @@ const initialFishes = [
   },
 ];
 
-export function FunctionalGameBoard({ nextFishIndex, handleAnswer, gameOver }) {
+export function FunctionalGameBoard({ nextFishIndex, handleAnswer }) {
   const [userGuess, setUserGuess] = useState("");
-  const [isCorrect, setIsCorrect] = useState(null);
+  //const [isCorrect, setIsCorrect] = useState(null);
 
   const nextFishToName = initialFishes[nextFishIndex];
 
@@ -32,13 +32,7 @@ export function FunctionalGameBoard({ nextFishIndex, handleAnswer, gameOver }) {
     e.preventDefault();
 
     const normalizedUserGuess = userGuess.toLowerCase();
-    const normalizedFishName = nextFishToName.name.toLowerCase();
 
-    if (normalizedUserGuess === normalizedFishName) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
-    }
 
     handleAnswer(normalizedUserGuess);
 
@@ -47,8 +41,7 @@ export function FunctionalGameBoard({ nextFishIndex, handleAnswer, gameOver }) {
 
   return (
     <div id="game-board">
-      {!gameOver && (
-        <>
+
           <div id="fish-container">
             <img src={nextFishToName.url} alt={nextFishToName.name} />
           </div>
@@ -62,9 +55,6 @@ export function FunctionalGameBoard({ nextFishIndex, handleAnswer, gameOver }) {
             />
             <input type="submit" />
           </form>
-        </>
-      )}
-      {gameOver && <div id="counts">{}</div>}
     </div>
   );
 }

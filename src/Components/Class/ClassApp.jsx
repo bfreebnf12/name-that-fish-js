@@ -9,14 +9,13 @@ export class ClassApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      incorrectCount: 0,
-      correctCount: 0,
+    incorrectCount: 0,
+    correctCount: 0,
     };
   }
 
   handleAnswer = (userGuess) => {
-    const currentFishIndex =
-      this.state.correctCount + this.state.incorrectCount;
+    const currentFishIndex = this.state.correctCount + this.state.incorrectCount;
 
     const isCorrect = initialFishes[currentFishIndex] === userGuess;
 
@@ -39,27 +38,32 @@ export class ClassApp extends Component {
   };
 
   render() {
-    const { incorrectCount, correctCount, gameOver } = this.state;
+    const { incorrectCount, correctCount } = this.state;
+    const currentFishIndex = correctCount + incorrectCount;
+    const gameOver = currentFishIndex >= initialFishes.length;
 
     return (
       <>
-        <ClassScoreBoard
-          incorrectCount={incorrectCount}
-          correctCount={correctCount}
-          answersLeft={initialFishes}
-        />
+        {!gameOver && (
+          <>
+            <ClassScoreBoard
+              incorrectCount={incorrectCount}
+              correctCount={correctCount}
+              answersLeft={initialFishes}
+            />
+            <ClassGameBoard
+              nextFishIndex={currentFishIndex}
+              handleAnswer={this.handleAnswer}
+              gameOver={gameOver}
+            />
+          </>
+        )}
 
-        {gameOver ? (
+        {gameOver && (
           <ClassFinalScore
             correctCount={correctCount}
             incorrectCount={incorrectCount}
             totalCount={correctCount + incorrectCount}
-          />
-        ) : (
-          <ClassGameBoard
-            nextFishIndex={correctCount + incorrectCount}
-            handleAnswer={this.handleAnswer}
-            gameOver={gameOver}
           />
         )}
       </>

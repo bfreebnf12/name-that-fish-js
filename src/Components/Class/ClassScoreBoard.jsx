@@ -30,16 +30,15 @@ export class ClassScoreBoard extends Component {
   };
 
   render() {
-    const { incorrectCount, correctCount } = this.state;
-    const { answersLeft } = this.props;
+    const { incorrectCount, correctCount, answersLeft } = this.props;
 
     return (
       <div id="score-board">
-        <div>Incorrect 🔻: {this.props.incorrectCount}</div>
+        <div>Incorrect 🔻: {incorrectCount}</div>
         <div id="choices-left">
-          {answersLeft.map((answer) => (
+          {answersLeft.map((answer, index) => (
             <div
-              key={answer}
+              key={index}
               className="choice"
               onClick={() => this.handleGuess(false)}
             >
@@ -47,7 +46,7 @@ export class ClassScoreBoard extends Component {
             </div>
           ))}
         </div>
-        <div>Correct ✅: {this.props.correctCount}</div>
+        <div>Correct ✅: {correctCount}</div>
       </div>
     );
   }
