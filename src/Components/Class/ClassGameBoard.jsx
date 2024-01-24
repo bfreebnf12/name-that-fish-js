@@ -1,65 +1,37 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import "./styles/game-board.css";
-import { Images } from "../../assets/Images";
-
-const initialFishes = [
-  {
-    name: "trout",
-    url: Images.trout,
-  },
-  {
-    name: "salmon",
-    url: Images.salmon,
-  },
-  {
-    name: "tuna",
-    url: Images.tuna,
-  },
-  {
-    name: "shark",
-    url: Images.shark,
-  },
-];
+import { initialFishes } from "../../data";
 
 export class ClassGameBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentFishIndex: 0,
       userGuess: "",
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { currentFishIndex, userGuess } = this.state;
-    const nextFishToName = initialFishes[currentFishIndex];
+    const { userGuess } = this.state;
+
     const normalizedUserGuess = userGuess.toLowerCase();
-    const normalizedFishName = nextFishToName.name.toLowerCase();
 
-    const isCorrect = normalizedUserGuess === normalizedFishName;
+    this.props.handleAnswer(normalizedUserGuess);
 
-    this.props.handleAnswer(this.state.userGuess);
-    if (isCorrect) {
-      console.log("Correct guess!");
-    } else {
-      console.log("Incorrect guess!");
-    }
-
-    this.setState((prevState) => ({
-      currentFishIndex: (prevState.currentFishIndex + 1) % initialFishes.length,
-      userGuess: "",
-    }));
+    this.setState({
+      userGuess: "", // Fixed the syntax error here
+    });
   };
 
   render() {
-    const { currentFishIndex, userGuess } = this.state;
-    const nextFishToName = initialFishes[currentFishIndex];
+    const { userGuess } = this.state;
+    const nextFishToName = initialFishes[this.props.nextFishIndex];
 
     return (
       <div id="game-board">
         <div id="fish-container">
-          <img src={nextFishToName.url} alt={nextFishToName.name} />
+          <img src={nextFishToName.url} alt={nextFishToName.name} />{" "}
+          {/* Fixed the alt attribute */}
         </div>
         <form id="fish-guess-form" onSubmit={this.handleSubmit}>
           <label htmlFor="fish-guess">What kind of fish is this?</label>

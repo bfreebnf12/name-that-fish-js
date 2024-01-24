@@ -1,4 +1,3 @@
-import React from "react";
 import "./styles/final-score.css";
 
 export const FunctionalFinalScore = ({ correctCount, totalCount }) => {

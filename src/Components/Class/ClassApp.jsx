@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { ClassGameBoard } from "./ClassGameBoard";
 import { ClassScoreBoard } from "./ClassScoreBoard";
 import { ClassFinalScore } from "./ClassFinalScore";
-
-const initialFishes = ["trout", "salmon", "tuna", "shark"];
+import { initialFishes } from "../../data";
 
 export class ClassApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    incorrectCount: 0,
-    correctCount: 0,
+      incorrectCount: 0,
+      correctCount: 0,
     };
   }
 
   handleAnswer = (userGuess) => {
-    const currentFishIndex = this.state.correctCount + this.state.incorrectCount;
-
-    const isCorrect = initialFishes[currentFishIndex] === userGuess;
+    const { correctCount, incorrectCount } = this.state;
+    const currentFishIndex = correctCount + incorrectCount;
+    const isCorrect = initialFishes[currentFishIndex].name === userGuess;
 
     if (isCorrect) {
       this.setState((prevState) => ({
@@ -29,10 +28,15 @@ export class ClassApp extends Component {
       }));
     }
 
-    if (
-      this.state.correctCount + 1 + this.state.incorrectCount >=
-      initialFishes.length
-    ) {
+    const updatedAnswersLeft = initialFishes
+      .map((fish) => fish.name)
+      .slice(currentFishIndex);
+
+    this.setState({
+      answersLeft: updatedAnswersLeft,
+    });
+
+    if (currentFishIndex + 1 >= initialFishes.length) {
       this.setState({ gameOver: true });
     }
   };
@@ -40,6 +44,9 @@ export class ClassApp extends Component {
   render() {
     const { incorrectCount, correctCount } = this.state;
     const currentFishIndex = correctCount + incorrectCount;
+    const answersLeft = initialFishes
+      .map((fish) => fish.name)
+      .slice(currentFishIndex);
     const gameOver = currentFishIndex >= initialFishes.length;
 
     return (
@@ -49,7 +56,7 @@ export class ClassApp extends Component {
             <ClassScoreBoard
               incorrectCount={incorrectCount}
               correctCount={correctCount}
-              answersLeft={initialFishes}
+              answersLeft={answersLeft}
             />
             <ClassGameBoard
               nextFishIndex={currentFishIndex}
