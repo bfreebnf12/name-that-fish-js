@@ -27,15 +27,6 @@ export class ClassApp extends Component {
         incorrectCount: prevState.incorrectCount + 1,
       }));
     }
-
-    const updatedAnswersLeft = initialFishes
-      .map((fish) => fish.name)
-      .slice(currentFishIndex);
-
-    this.setState({
-      answersLeft: updatedAnswersLeft,
-    });
-
     if (currentFishIndex + 1 >= initialFishes.length) {
       this.setState({ gameOver: true });
     }

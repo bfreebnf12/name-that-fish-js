@@ -15,7 +15,7 @@ export class ClassScoreBoard extends Component {
         <div id="choices-left">
           {answersLeft.map((answer, index) => (
             <div
-              key={index}
+              key={answer}
               className="choice"
               onClick={() => this.handleGuess(false)}
             >
